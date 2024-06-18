@@ -10,6 +10,6 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long groupId;
-    @Column(name = "groupname")
+    @Column(name = "groupName")
     private String groupName;
 }

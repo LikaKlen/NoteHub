@@ -11,21 +11,19 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long teacherId;
-    @Column(name = "firstname")
+    @Column(name = "firstName")
     private String firstName;
-    @Column(name = "lastname")
+    @Column(name = "lastName")
     private String lastName;
     @Column(name = "patronymic")//отчество
     private String patronymic;
 //    @Column(name = "age")
 //    private String age;
-    @Column(name = "login")
-    private String login;
     @Column(name = "password")
     private String password;
     @Column(name = "email")
     private String email;
-    @Column(name = "phonenumber")
+    @Column(name = "phoneNumber")
     private String phoneNumber;
     @ManyToOne
     @JoinColumn(name = "subjectId")

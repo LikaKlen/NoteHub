@@ -10,6 +10,6 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long subjectId;
-    @Column(name = "subjectname")
+    @Column(name = "subjectName")
     private String subjectName;
 }

@@ -16,9 +16,9 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long studentId;
-    @Column(name = "firstname")
+    @Column(name = "firstName")
     private String firstName;
-    @Column(name = "lastname")
+    @Column(name = "lastName")
     private String lastName;
     @Column(name = "patronymic")//отчество
     private String patronymic;
@@ -30,7 +30,7 @@ public class Student {
 //    private String password;
     @Column(name = "email")
     private String email;
-    @Column(name = "phonenumber")
+    @Column(name = "phoneNumber")
     private String phoneNumber;
     @ManyToOne
     @JoinColumn(name = "groupId", referencedColumnName = "groupId")

@@ -12,9 +12,9 @@ public class Parent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long parentId;
-    @Column(name = "firstname")
+    @Column(name = "firstName")
     private String firstName;
-    @Column(name = "lastname")
+    @Column(name = "lastName")
     private String lastName;
     @Column(name = "patronymic")//отчество
     private String patronymic;
@@ -26,7 +26,7 @@ public class Parent {
 //    private String password;
     @Column(name = "email")
     private String email;
-    @Column(name = "phonenumber")
+    @Column(name = "phoneNumber")
     private String phoneNumber;
     @ManyToMany
     @JoinTable(name = "Has",

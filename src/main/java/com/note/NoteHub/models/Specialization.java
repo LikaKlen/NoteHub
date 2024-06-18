@@ -10,6 +10,6 @@ public class Specialization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long specializationId;
-    @Column(name = "specializationname")
-    private String speacializationName;
+    @Column(name = "specializationName")
+    private String specializationName;
 }

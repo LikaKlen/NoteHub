@@ -12,11 +12,11 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long reviewId;
-    @Column(name = "shortdescription")
+    @Column(name = "shortDescription")
     private String shortDescription;
     @Column(name = "estimation")
     private int estimation;
-    @Column(name = "datetime")
+    @Column(name = "dateTime")
     private LocalDateTime dateTime;
     @OneToOne
     @JoinColumn(name = "studentId", referencedColumnName = "studentId")
