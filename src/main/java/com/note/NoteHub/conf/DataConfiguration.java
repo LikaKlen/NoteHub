@@ -21,7 +21,7 @@ public class DataConfiguration {
     }
 
     @Bean
-    public Teacher teacher() {
+    public Teacher teacher(){
         return new Teacher();
     }
 
