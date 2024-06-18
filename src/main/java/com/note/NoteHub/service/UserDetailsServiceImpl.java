@@ -11,8 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDetailsServiceImpl  {
-    //implements UserDetailsService
+public class UserDetailsServiceImpl  implements UserDetailsService{
     private final DataAccessLayer dataAccessLayer;
 
     @Autowired
@@ -20,27 +19,26 @@ public class UserDetailsServiceImpl  {
         this.dataAccessLayer = dataAccessLayer;
     }
 
-//    public String newTeacher(SignupRequest signupRequest) {
-//        Teacher teacher = new Teacher();
-//        teacher.setTeacherId(signupRequest.getTeacherId());
-//        teacher.setFirstName(signupRequest.getFirstName());
-//        teacher.setLastName(signupRequest.getLastName());
-//        teacher.setPatronymic(signupRequest.getPatronymic());
-//        teacher.setEmail(signupRequest.getEmail());
-//        teacher.setPhoneNumber(signupRequest.getPhoneNumber());
-//        teacher.setPhoneNumber(signupRequest.getPhoneNumber());
-//        teacher.setPassword(signupRequest.getPassword());
-//        return dataAccessLayer.newUserToDatabase(teacher);
-//    }
-//
-//    @Override
-//    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-//        Teacher teacher = dataAccessLayer.getUserFromDatabaseByUsername(userName);
-//        if (teacher == null) return null;
-//        return UserDetailsImpl.build(teacher);
-//    }
-//
-//    public Teacher loadUserEntityByUsername(String Email) throws UsernameNotFoundException {
-//        return dataAccessLayer.getUserFromDatabaseByUsername(userName);
-//    }
+    public String newTeacher(SignupRequest signupRequest) {
+        Teacher teacher = new Teacher();
+        teacher.setFirstName(signupRequest.getFirstName());
+        teacher.setLastName(signupRequest.getLastName());
+        teacher.setPatronymic(signupRequest.getPatronymic());
+        teacher.setEmail(signupRequest.getEmail());
+        teacher.setPhoneNumber(signupRequest.getPhoneNumber());
+        teacher.setPhoneNumber(signupRequest.getPhoneNumber());
+        teacher.setPassword(signupRequest.getPassword());
+        return dataAccessLayer.newTeacherToDatabase(teacher);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Teacher teacher = dataAccessLayer.getTeacherFromDatabaseByEmail(email);
+        if (teacher == null) return null;
+        return UserDetailsImpl.build(teacher);
+    }
+
+    public Teacher loadUserEntityByUsername(String email) throws UsernameNotFoundException {
+        return dataAccessLayer.getTeacherFromDatabaseByEmail(email);
+    }
 }

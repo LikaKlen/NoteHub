@@ -59,8 +59,10 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable).cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer
                         .configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())).exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)).authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/**").permitAll().requestMatchers("/main/**").permitAll()
-                        .requestMatchers("/secured/**").fullyAuthenticated().requestMatchers("/admin/**").fullyAuthenticated()
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/main/**").permitAll()
+                        .requestMatchers("/secured/**").fullyAuthenticated()
+                        .requestMatchers("/admin/**").fullyAuthenticated()
                         .anyRequest().permitAll())
                 .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
