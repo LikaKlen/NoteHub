@@ -1,21 +1,17 @@
 package com.note.NoteHub.models;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "student", schema = "public", catalog = "NoteHub")
-@NoArgsConstructor
-public class Student {
+@Table(name = "parent", schema = "public", catalog = "NoteHub")
+public class Parent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long studentId;
+    private Long parentId;
     @Column(name = "firstname")
     private String firstName;
     @Column(name = "lastname")
@@ -32,12 +28,9 @@ public class Student {
     private String email;
     @Column(name = "phonenumber")
     private String phoneNumber;
-    @ManyToOne
-    @JoinColumn(name = "groupId", referencedColumnName = "groupId")
-    private Group group;
-    @ManyToOne
-    @JoinColumn(name = "specializationId", referencedColumnName = "specializationId")
-    private Specialization specialization;
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "student")
-    private Set<Parent> parent;
+    @ManyToMany
+    @JoinTable(name = "Has",
+            joinColumns = @JoinColumn(name = "parentId", referencedColumnName = "parentId"),
+            inverseJoinColumns = @JoinColumn(name = "studentId", referencedColumnName = "studentId"))
+    private Set<Student> student;
 }

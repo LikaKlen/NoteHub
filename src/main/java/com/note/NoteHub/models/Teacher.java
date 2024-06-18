@@ -17,12 +17,19 @@ public class Teacher {
     private String lastName;
     @Column(name = "patronymic")//отчество
     private String patronymic;
+//    @Column(name = "age")
+//    private String age;
     @Column(name = "login")
     private String login;
     @Column(name = "password")
     private String password;
     @Column(name = "email")
     private String email;
+    @Column(name = "phonenumber")
+    private String phoneNumber;
+    @ManyToOne
+    @JoinColumn(name = "subjectId")
+    private Subject subject;
 
 
 }
