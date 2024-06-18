@@ -21,33 +21,34 @@ public class TokenFilter extends OncePerRequestFilter {
     private JwtCore jwtCore;
     @Autowired
     private UserDetailsService userDetailsService;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String jwt = null;
         String userName = null;
         UserDetails userDetails = null;
         UsernamePasswordAuthenticationToken auth = null;
-//        try {
-//            String headerAuth = request.getHeader("Authorization");
-//            if (headerAuth != null && headerAuth.startsWith("Bearer ")) {
-//                jwt = headerAuth.substring(7);
-//            }
-//            if (jwt != null) {
-//                try {
+        try {
+            String headerAuth = request.getHeader("Authorization");
+            if (headerAuth != null && headerAuth.startsWith("Bearer ")){
+                jwt = headerAuth.substring(7);
+            }
+            if (jwt != null) {
+                try {
 //                    userName = jwtCore.getNameFromJwt(jwt);
-//                } catch (ExpiredJwtException e) {
-//                    logger.error("Ошибка " + e.getMessage());//                }
-//                    if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-//                        userDetails = userDetailsService.loadUserByUsername(userName);
-//                        auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-//                        SecurityContextHolder.getContext().setAuthentication(auth);
-//                    }
-//                }
-//            }catch(Exception e){
-//                logger.error("Ошибка " + e.getMessage());
-//            }
-//            filterChain.doFilter(request, response);
-//        }
+                }
+                catch(ExpiredJwtException e){
+                    logger.error("Ошибка " + e.getMessage());//
+                }
+                if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                    userDetails = userDetailsService.loadUserByUsername(userName);
+                    auth = new UsernamePasswordAuthenticationToken(userDetails, null,userDetails.getAuthorities());
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                }
+            }
+        }
+        catch (Exception e) {
+            logger.error("Ошибка " + e.getMessage());//
+        }
+        filterChain.doFilter(request, response);
     }
 }
