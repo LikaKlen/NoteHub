@@ -127,56 +127,6 @@ public class DataAccessLayer {
         }
     }
 
-    //Subject
-    public void createSubject(Subject newSubject) {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.persist(newSubject);
-        session.getTransaction().commit();
-        if (session != null) {
-            session.close();
-        }
-    }
-    public void deleteSubjectById(Long id){
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        Subject subject = session.get(Subject.class, id);
-        session.remove(subject);
-        session.getTransaction().commit();
-        if (session != null) {
-            session.close();
-        }
-    }
-    public Subject getSubjectById(Long id){
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        Subject subject = session.get(Subject.class, id);
-        session.getTransaction().commit();
-        if (session != null) {
-            session.close();
-        }
-        return subject;
-    }
-    public List<Subject> getSubjects(){
-        session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Subject> query = builder.createQuery(Subject.class);
-        Root<Subject> root = query.from(Subject.class);
-        query.select(root);
-        return session.createQuery(query).getResultList();
-    }
-    public void updateSubjectById(Long id, Subject updatedSubject){
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        Subject subject = session.get(Subject.class, id);
-        subject.setSubjectName(updatedSubject.getSubjectName());
-        session.merge(subject);
-        session.getTransaction().commit();
-        if (session != null) {
-            session.close();
-        }
-    }
     //Parent
     public void createParent(Parent newParent) {
         session = sessionFactory.openSession();
@@ -421,7 +371,6 @@ public class DataAccessLayer {
         teacher.setPatronymic(updatedUser.getPatronymic());
         teacher.setEmail(updatedUser.getEmail());
         teacher.setPhoneNumber(updatedUser.getPhoneNumber());
-        teacher.setSubject(updatedUser.getSubject());///?
         teacher.setPassword(updatedUser.getPassword());
         session.merge(teacher);
         session.getTransaction().commit();

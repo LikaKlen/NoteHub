@@ -1,10 +1,6 @@
 package com.note.NoteHub.security;
 
-import com.note.NoteHub.models.Subject;
 import com.note.NoteHub.models.Teacher;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,7 +19,7 @@ public class UserDetailsImpl implements UserDetails {
     private String patronymic;
     private String email;
     private String phoneNumber;
-    private Subject subject;
+
     private String password;
 
     public static UserDetailsImpl build(Teacher teacher) {
@@ -31,7 +27,7 @@ public class UserDetailsImpl implements UserDetails {
                 teacher.getTeacherId(), teacher.getFirstName(),
                 teacher.getLastName(), teacher.getPatronymic(),
                 teacher.getEmail(), teacher.getPhoneNumber(),
-                teacher.getSubject(), teacher.getPassword());
+                teacher.getPassword());
     }
 
     @Override

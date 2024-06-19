@@ -25,9 +25,7 @@ public class Teacher {
     private String email;
     @Column(name = "phoneNumber")
     private String phoneNumber;
-    @ManyToOne
-    @JoinColumn(name = "subjectId")
-    private Subject subject;
+
 
 
 }
