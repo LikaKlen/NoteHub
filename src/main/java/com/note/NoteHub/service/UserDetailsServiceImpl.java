@@ -24,9 +24,8 @@ public class UserDetailsServiceImpl  implements UserDetailsService{
         teacher.setFirstName(signupRequest.getFirstName());
         teacher.setLastName(signupRequest.getLastName());
         teacher.setPatronymic(signupRequest.getPatronymic());
+        teacher.setPhoneNumber(signupRequest.getPhoneNumber());
         teacher.setEmail(signupRequest.getEmail());
-        teacher.setPhoneNumber(signupRequest.getPhoneNumber());
-        teacher.setPhoneNumber(signupRequest.getPhoneNumber());
         teacher.setPassword(signupRequest.getPassword());
         return dataAccessLayer.newTeacherToDatabase(teacher);
     }

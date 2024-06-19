@@ -8,7 +8,8 @@ public class SignupRequest {
     private String lastName;
     private String patronymic;
     private String phoneNumber;
-    private String password;
     private String email;
+    private String password;
+
 
 }

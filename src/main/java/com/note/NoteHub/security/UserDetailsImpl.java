@@ -17,16 +17,18 @@ public class UserDetailsImpl implements UserDetails {
     private String firstName;
     private String lastName;
     private String patronymic;
-    private String email;
     private String phoneNumber;
-
+    private String email;
     private String password;
 
     public static UserDetailsImpl build(Teacher teacher) {
         return new UserDetailsImpl(
-                teacher.getTeacherId(), teacher.getFirstName(),
-                teacher.getLastName(), teacher.getPatronymic(),
-                teacher.getEmail(), teacher.getPhoneNumber(),
+                teacher.getTeacherId(),
+                teacher.getFirstName(),
+                teacher.getLastName(),
+                teacher.getPatronymic(),
+                teacher.getPhoneNumber(),
+                teacher.getEmail(),
                 teacher.getPassword());
     }
 

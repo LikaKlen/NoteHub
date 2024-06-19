@@ -1,7 +1,7 @@
 import React from 'react'
-import './LogIn.css'
+import './Reg.css'
 
-const LogIn=()=>{
+const Reg=()=>{
    
     return(
         <div className='wrapper'>
@@ -11,7 +11,19 @@ const LogIn=()=>{
                     <input type='text' placeholder='FirstName' required></input>
                 </div>
                 <div className='input-box'>
-                    <input type='password' placeholder='Password' required></input>
+                    <input type='text' placeholder='LastName' required></input>
+                </div>
+                <div className='input-box'>
+                    <input type='text' placeholder='Patronymic' required></input>
+                </div>
+                <div className='input-box'>
+                    <input type='text' placeholder='PhoneNumber' required></input>
+                </div>
+                <div className='input-box'>
+                    <input type='text' placeholder='Password' required></input>
+                </div>
+                <div className='input-box'>
+                    <input type='password' placeholder='Email' required></input>
                 </div>
                 <div className='remember-forgot'>
                     <label><input type='checkbox'/> Remember me</label>
@@ -25,4 +37,4 @@ const LogIn=()=>{
     );
 
 };
-export default LogIn;
+export default Reg;
