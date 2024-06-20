@@ -55,7 +55,7 @@ public class DataAccessLayer {
         }
         return group;
     }
-    public List<Group> getGroups(){
+    public List<Group>getGroups(){
         session = sessionFactory.openSession();
         session.getTransaction().begin();
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -213,6 +213,26 @@ public class DataAccessLayer {
         }
         return student;
     }
+    public List<Student> getStudentByGroupId(Long id) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Student> query = builder.createQuery(Student.class);
+        Root<Student> root = query.from(Student.class);
+        Predicate groupIdPredicate = builder.equal(root.get("group").get("groupId"), id);
+        query.select(root).where(groupIdPredicate);
+        return session.createQuery(query).getResultList();
+    }
+    public List<Student> getStudentBySpecializationId(Long id) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Student> query = builder.createQuery(Student.class);
+        Root<Student> root = query.from(Student.class);
+        Predicate specializationIdPredicate = builder.equal(root.get("specialization").get("specializationId"), id);
+        query.select(root).where(specializationIdPredicate);
+        return session.createQuery(query).getResultList();
+    }
     public List<Student> getStudents(){
         session = sessionFactory.openSession();
         session.getTransaction().begin();
@@ -270,6 +290,26 @@ public class DataAccessLayer {
             session.close();
         }
         return review;
+    }
+    public List<Review> getReviewByStudentId(Long id) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Review> query = builder.createQuery(Review.class);
+        Root<Review> root = query.from(Review.class);
+        Predicate studentIdPredicate = builder.equal(root.get("student").get("studentId"), id);
+        query.select(root).where(studentIdPredicate);
+        return session.createQuery(query).getResultList();
+    }
+    public List<Review> getReviewByTeacherId(Long id) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Review> query = builder.createQuery(Review.class);
+        Root<Review> root = query.from(Review.class);
+        Predicate teacherIdPredicate = builder.equal(root.get("teacher").get("teacherId"), id);
+        query.select(root).where(teacherIdPredicate);
+        return session.createQuery(query).getResultList();
     }
     public List<Review> getReviews(){
         session = sessionFactory.openSession();

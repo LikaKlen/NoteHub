@@ -20,10 +20,8 @@ public class Parent {
     private String patronymic;
     @Column(name = "age")
     private String age;
-//    @Column(name = "login")
-//    private String login;
-//    @Column(name = "password")
-//    private String password;
+    @Column(name = "photoLink")
+    private String photoLink;
     @Column(name = "email")
     private String email;
     @Column(name = "phoneNumber")

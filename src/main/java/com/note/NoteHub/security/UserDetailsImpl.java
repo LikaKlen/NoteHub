@@ -24,9 +24,12 @@ public class UserDetailsImpl implements UserDetails {
 
     public static UserDetailsImpl build(Teacher teacher) {
         return new UserDetailsImpl(
-                teacher.getTeacherId(), teacher.getFirstName(),
-                teacher.getLastName(), teacher.getPatronymic(),
-                teacher.getEmail(), teacher.getPhoneNumber(),
+                teacher.getTeacherId(),
+                teacher.getFirstName(),
+                teacher.getLastName(),
+                teacher.getPatronymic(),
+                teacher.getEmail(),
+                teacher.getPhoneNumber(),
                 teacher.getPassword());
     }
 

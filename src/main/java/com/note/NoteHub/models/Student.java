@@ -24,14 +24,12 @@ public class Student {
     private String patronymic;
     @Column(name = "age")
     private String age;
-//    @Column(name = "login")
-//    private String login;
-//    @Column(name = "password")
-//    private String password;
     @Column(name = "email")
     private String email;
     @Column(name = "phoneNumber")
     private String phoneNumber;
+    @Column(name = "photoLink")
+    private String photoLink;
     @ManyToOne
     @JoinColumn(name = "groupId", referencedColumnName = "groupId")
     private Group group;
