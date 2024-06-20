@@ -104,37 +104,31 @@ export default{
   <div class="logo">
     <a href="/home"><img src="C:\Users\Admin\Downloads\NoteHub\vue-project\src\assets\logo.png" height="100px"></a>
     </div>
-  <nav>
-      <ul class="nav">
-        <li><a href="">Каталог</a></li>
-        <li><a href="">Корзина</a></li>
-        <li><a href="/log">Войти</a></li>
-        <li><a href="/reg">Регистрация</a></li>
-      </ul>
-    </nav>
   </header>
   <main>
- 
     <div class="reg_window">
         <div class="reg_input">
           <h2>Регистрация</h2>
           <p>
-          <label for="text" class="floatLabel">Введите Имя</label>
-            <input type="text" v-model="firstName" placeholder="Login">
+            <label for="text" class="floatLabel">Введите Имя</label>
+            <input type="text" v-model="firstName" placeholder="First Name">
             <span class="error-message" v-if="loginError">Введите логин</span>
           </p>
           <p>
-          <label for="text" class="floatLabel">Введите Фамилию</label>
-            <input type="text" v-model="lastName" placeholder="Login">
+            <label for="text" class="floatLabel">Введите Фамилию</label>
+            <input type="text" v-model="lastName" placeholder="Last Name">
             <span class="error-message" v-if="loginError">Введите логин</span>
           </p>
-        <p><label for="text" class="floatLabel">Введите Отчество</label>
-            <input type="text" v-model="patronymic" placeholder="patronymic">
+          <p>
+            <label for="text" class="floatLabel">Введите Отчество</label>
+            <input type="text" v-model="patronymic" placeholder="Patronymic">
           </p>
-          <p><label for="text" class="floatLabel">Введите номер телефона</label>
-            <input type="text" v-model="phoneNumber" placeholder="number">
+          <p>
+            <label for="text" class="floatLabel">Введите номер телефона</label>
+            <input type="text" v-model="phoneNumber" placeholder="Phone Number">
           </p>
-            <p><label for="Email" class="floatLabel">Введите почту</label>
+           <p>
+            <label for="Email" class="floatLabel">Введите почту</label>
             <input type="email" v-model="email" placeholder="Email"></p>
             <span class="error-message" v-if="emailError">Неверный формат электронной почты</span>
             <span class="error-message" v-if="email1Error">Введите адрес электронной почты</span>
@@ -155,41 +149,29 @@ export default{
             </button>
             
         </div>
+        <p>Есть аккаунт<a href="/log">Войти</a></p>
     </div>
     
   </main>
-  <footer class="footer-distributed">
-
-<div class="footer-left">
-
-  <h3>Hidework</h3>
-
-  <p class="footer-links">
-    <a href="/home" class="link-1">Главная</a>
-
-    <a href="">О Каталог</a>
-
-    <a href=""></a>
-
-    <a href=""></a>
-
-  </p>
-</div>
-
-<div class="footer-center">
-
-
-
-  <div>
-    <i class="fa fa-envelope"></i>
-    <p class="tx1"><a class="a" href="">Hidework@gmail.com</a></p>
-  </div>
-
-</div>
-
-<div class="footer-right">
-  <div class="footer-icons">
-    <a href=""><i class="fa fa-twitter"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64px"
+  <footer class="footer-distributed container" >
+    <div class="footer-left">
+      <h3>NoteHub</h3>
+      <p class="footer-links">
+        <a href="/home" class="link-1"></a>
+        <a href=""></a>
+        <a href=""></a>
+        <a href=""></a>
+      </p>
+    </div>
+    <div class="footer-center">
+      <div>
+        <i class="fa fa-envelope"></i>
+        <p class="tx1"><a class="a" href=""></a></p>
+      </div>
+    </div>
+    <div class="footer-right">
+      <div class="footer-icons">
+        <a href=""><i class="fa fa-twitter"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64px"
           height="64px">
           <linearGradient id="EEzBmxT86u8E~6vCqQtLma" x1="29.5" x2="29.5" y1="19.006" y2="46"
             gradientUnits="userSpaceOnUse" spreadMethod="reflect">
@@ -248,9 +230,9 @@ export default{
           <path fill="url(#kgRuRVfhYbsg7F4Xxd2wXb)"
             d="M40.975,32.906c0,0,3.974-5.822,4.369-7.664C45.477,24.584,45.188,24,44.502,24 c0,0-2.29,0-3.448,0c-0.79,0-1.079,0.558-1.316,1.058c0,0-1.864,4.08-4.132,6.583c-0.728,0.809-0.914,1.107-1.316,1.107 c-0.324,0-0.29-0.216-0.29-0.946v-6.396C34,24.51,33.528,24,32.791,24h-5.527c-0.421,0-0.618,0.368-0.618,0.702 c0,0.843,1.356,1.156,1.356,3.44v4.711c0,0.948-0.119,1.316-0.566,1.316c-1.184,0-4.034-4.203-5.613-8.836 C21.505,24.387,21.13,24,20.236,24h-3.448c-0.5,0-0.869,0.466-0.869,0.966c0,0.921,1.079,5.247,5.317,10.959 c2.843,3.843,6.711,5.953,10.08,5.953c2.053,0,2.684-0.311,2.684-1.18V37.75c0-0.737,0.158-1.053,0.579-1.053 c0.474,0,1.244,0.198,3.198,2.125C40.095,41.033,40.187,42,41.45,42h3.869c0.395,0,0.763-0.23,0.763-0.888 c0-0.869-1.132-2.444-2.869-4.287c-0.711-0.947-1.869-1.985-2.237-2.459C40.45,33.813,40.607,33.485,40.975,32.906z" />
         </svg></i>
-    </a>
-  </div>
-  <p class="footer-company-name">Hidework © 2024</p>
+      </a>
+    </div>
+  <p class="footer-company-name">NoteHub © 2024</p>
 </div>
 </footer>
 </template>
@@ -260,280 +242,167 @@ export default{
 
 
 <style scoped>
-header {
-  width: 100%;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding-left: 15px;
-  padding-right: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Reset some default styles */
+body, html {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  background-color: rgb(180,180,166)
-}
-.nav {
-  list-style-type: none;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  font-family: Arial, sans-serif;
 }
 
-.nav>li a {
-  margin-left: 15px;
-  text-decoration: none;
-  color: #000;
-}
-.size {
-  font-size: 80px;
-}
-.text{
+/* Ensure the header and footer span the full width of the screen */
+header, footer {
   width: 100%;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding-left: 15px;
-  padding-right: 15px;
+}
+
+/* Header styling */
+header {
   display: flex;
   justify-content: space-between;
   align-items: center;
- 
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
 }
 
-.reg_window{
-  background: #fff;
-  padding: 4em 4em 2em;
+.logo img {
+  height: 100px;
+}
+
+nav ul.nav {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul.nav li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+nav ul.nav li a:hover {
+  text-decoration: underline;
+}
+
+/* Main content styling */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 160px); /* Adjust based on header and footer height */
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.reg_window {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
   max-width: 400px;
-  margin: 50px auto 0;
-  box-shadow: 0 0 1em  rgb(207, 173, 147);
-  border-radius: 2px;
-  h2 {
-    margin:0 0 50px 0;
-    padding:10px;
-    text-align:center;
-    font-size:30px;
-    color:darken(#e5e5e5, 50%);
-    border-bottom:solid 1px #e5e5e5;
-  }
-  p {
-    margin: 0 0 3em 0;
-    position: relative;
-  }
-  input {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    outline: none;
-    margin:0;
-  }
-  input[type="text"],
-  input[type="password"],
-  input[type="number"],
-  input[type="email"]   {
-    background: #fff;
-    border: 1px solid #dbdbdb;
-    font-size: 1.6em;
-    padding: .8em .5em;
-    border-radius: 2px;
-  }
-  input[type="text"]:focus,
-  input[type="password"]:focus,
-  input[type="number"]:focus,
-  input[type="email"]:focus  {
-    background: #fff
-  }
-  .error-message {
+  width: 100%;
+}
+
+.reg_input h2 {
+  margin-bottom: 20px;
+}
+
+.reg_input p {
+  margin-bottom: 10px;
+}
+
+.reg_input label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.reg_input input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error-message {
   color: red;
-  font-size: 14px;
+  font-size: 0.875em;
   margin-top: 5px;
 }
 
-  }
-.log{
-  height: auto;
-  width: auto;
-  align-items: center;
-  justify-content:space-around;
-  margin-bottom:3vh;
-}
-.reg{
-  height: auto;
-  width: auto;
-  
-}
-.reg_Button{
-  justify-content: center;
-  display: flex;
-}
-.regBT{
- 
-    text-align:center;
-    font-size:30px;
-    border-bottom:solid 1px #e5e5e5;
-    border-radius: 2px;
-    border: none;
-    cursor: pointer;
-    display: block;
-    font-size: 2em;
-    line-height: 1.6em;
-    margin: 2em 0 0;
-    outline: none;
-  background: rgba(148,175,101,1);
+.reg_Button {
+  margin-top: 20px;
 }
 
+.regBT {
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.regBT:hover {
+  background-color: #555;
+}
+
+/* Footer styling */
 .footer-distributed {
-background: rgba(71, 59, 50);
-box-shadow:  rgba(71, 59, 50);
-width: 100%;
-text-align: left;
-font: bold 16px sans-serif;
-padding: 55px 50px;
-width: 100%;
-display: flex;
-display: inline-block;
-height: 50vh;
-text-align: center;
-font-size: 22px;
-font-weight: 700;
-text-decoration: underline;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.footer-distributed .footer-left,
-.footer-distributed .footer-center,
-.footer-distributed .footer-right {
-display: inline-block;
-vertical-align: top;
+.footer-left, .footer-center, .footer-right {
+  width: 30%;
 }
 
-/* Footer left */
-.footer-distributed .footer-left {
-width: 100%;
+.footer-links {
+  list-style: none;
+  padding: 0;
 }
 
-/* The company logo */
-.footer-distributed h3 {
-color: #ffffff;
-font: normal 36px 'Open Sans', cursive;
-margin: 0;
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
 }
 
-.footer-distributed h3 span {
-color: lightseagreen;
+.footer-links a:hover {
+  text-decoration: underline;
 }
 
-/* Footer links */
-.footer-distributed .footer-links {
-color: #ffffff;
-margin: 20px 0 12px;
-padding: 0;
+.footer-icons {
+  display: flex;
+  gap: 10px;
 }
 
-.footer-distributed .footer-links a {
-display: inline-block;
-line-height: 1.8;
-font-size: 20px;
-font-weight: 400;
-text-decoration: none;
-color: inherit;
+.footer-icons a {
+  color: #fff;
+  text-decoration: none;
 }
 
-.footer-distributed .footer-company-name {
-color: #222;
-font-size: 14px;
-font-weight: normal;
-margin: 0;
+.footer-company-name {
+  margin-top: 10px;
 }
 
-/* Footer Center */
-.footer-distributed .footer-center {
-width: 35%;
+.footer-company-name, .tx1, .a {
+  font-size: 0.875em;
 }
 
-.footer-distributed .footer-center i {
-background-color: #33383b;
-color: #ffffff;
-font-size: 25px;
-width: 38px;
-height: 38px;
-border-radius: 50%;
-text-align: center;
-line-height: 42px;
-margin: 10px 15px;
-vertical-align: middle;
+.tx1 a, .a {
+  color: #fff;
+  text-decoration: none;
 }
 
-.footer-distributed .footer-center i.fa-envelope {
-font-size: 17px;
-line-height: 38px;
-text-align: center;
+.tx1 a:hover, .a:hover {
+  text-decoration: underline;
 }
-
-.footer-distributed .footer-center .tx1 {
-display: inline-block;
-color: #ffffff;
-font-weight: 400;
-vertical-align: middle;
-margin: 0;
-}
-
-.footer-distributed .footer-center .tx1 span {
-display: block;
-font-weight: normal;
-font-size: 14px;
-line-height: 2;
-}
-
-.footer-distributed .footer-center .tx1 a {
-color: rgb(255, 255, 255);
-text-decoration: none;
-
-}
-
-.footer-distributed .footer-links a:before {
-content: "|";
-font-weight: 300;
-font-size: 20px;
-left: 0;
-color: #fff;
-display: inline-block;
-padding-right: 5px;
-text-align: center;
-}
-
-
-
-.footer-distributed .footer-right {
-width: 100%;
-}
-
-.footer-distributed .footer-icons {
-margin-top: 100px;
-
-}
-
-.footer-distributed .footer-icons a {
-display: inline-block;
-max-width: 1180px;
-
-cursor: pointer;
-font-size: 20px;
-color: #ffffff;
-text-align: center;
-flex-wrap: wrap;
-line-height: 35px;
-margin-right: 30px;
-margin-bottom: 15px;
-}
-@keyframes gradient {
-    0% {
-        background-position: 80% 0%;
-    }
-    50% {
-        background-position: 20% 100%;
-    }
-    100% {
-        background-position: 80% 0%;
-    }
-  }
-
 </style>
 
