@@ -320,25 +320,22 @@ public class DataAccessLayer {
         query.select(root);
         return session.createQuery(query).getResultList();
     }
-
-
-
-
-
-
-
-//    public List<Material> getMaterialByKnowledgeLevelId(Long id) {
-//        session = sessionFactory.openSession();
-//        session.beginTransaction();
-//        CriteriaBuilder builder = session.getCriteriaBuilder();
-//        CriteriaQuery<Material> query = builder.createQuery(Material.class);
-//        Root<Material> root = query.from(Material.class);
-//        Predicate knowledgeLevelIdPredicate = builder.equal(root.get("knowledgeLevel").get("knowledgeLevelId"), id);
-//        query.select(root).where(knowledgeLevelIdPredicate);
-//        return session.createQuery(query).getResultList();
-//    }
-
-//Teacher
+    public void updateReviewById(Long id, Review updatedReview){
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Review review = session.get(Review.class, id);
+        review.setShortDescription(updatedReview.getShortDescription());
+        review.setDateTime(updatedReview.getDateTime());
+        review.setEstimation(updatedReview.getEstimation());
+        review.setStudent(updatedReview.getStudent());
+        review.setTeacher(updatedReview.getTeacher());
+        session.merge(review);
+        session.getTransaction().commit();
+        if (session != null) {
+            session.close();
+        }
+    }
+    //Teacher
     public String newTeacherToDatabase(Teacher teacher) {
         session = sessionFactory.openSession();
         session.beginTransaction();
