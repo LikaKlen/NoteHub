@@ -1,9 +1,13 @@
 package com.note.NoteHub.control;
 
 import com.note.NoteHub.dal.DataAccessLayer;
+import com.note.NoteHub.models.Review;
+import com.note.NoteHub.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
@@ -38,6 +42,14 @@ public class MainController {
     public ResponseEntity getReviewById(@PathVariable("id") long id){
         return ResponseEntity.ok(dataAccessLayer.getReviewById(id));
     }
+    @GetMapping("/get/reviewByStudentId")
+    public List<Review> getReviewByStudentId(@RequestParam Long id) {
+        return dataAccessLayer.getReviewByStudentId(id);
+    }
+    @GetMapping("/get/reviewByTeacherId")
+    public List<Review> getReviewByTeacherId(@RequestParam Long id) {
+        return dataAccessLayer.getReviewByTeacherId(id);
+    }
     @GetMapping("get/reviews")
     public ResponseEntity getReviews(){
         return ResponseEntity.ok(dataAccessLayer.getReviews());
@@ -55,6 +67,14 @@ public class MainController {
     @GetMapping("/get/student/{id}")
     public ResponseEntity getStudentById(@PathVariable("id") long id){
         return ResponseEntity.ok(dataAccessLayer.getStudentById(id));
+    }
+    @GetMapping("/get/studentByGroupId")
+    public List<Student> getStudentByGroupId(@RequestParam Long id) {
+        return dataAccessLayer.getStudentByGroupId(id);
+    }
+    @GetMapping("/get/studentBySpecializationId")
+    public List<Student> getStudentBySpecializationId(@RequestParam Long id) {
+        return dataAccessLayer.getStudentBySpecializationId(id);
     }
     @GetMapping("get/students")
     public ResponseEntity getStudents(){

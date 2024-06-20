@@ -73,6 +73,11 @@ public class AdminController {
         dataAccessLayer.deleteReviewById(id);
         return ResponseEntity.ok("Отзыв был успешно удален");
     }
+    @PutMapping("/update/review/{id}")
+    public ResponseEntity updateReviewById(@PathVariable("id") long id, @RequestBody Review updatedReview){
+        dataAccessLayer.updateReviewById(id, updatedReview);
+        return ResponseEntity.ok("Отзыв была успешно отредактирован");
+    }
     //specialization
     @PostMapping("/new/specialization")
     public ResponseEntity<String> newSpecialization(@RequestBody Specialization specialization) {

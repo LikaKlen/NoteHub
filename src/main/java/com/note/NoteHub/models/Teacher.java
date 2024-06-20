@@ -17,15 +17,14 @@ public class Teacher {
     private String lastName;
     @Column(name = "patronymic")//отчество
     private String patronymic;
-//    @Column(name = "age")
-//    private String age;
     @Column(name = "password")
     private String password;
     @Column(name = "email")
     private String email;
     @Column(name = "phoneNumber")
     private String phoneNumber;
-
+    @Column(name = "photoLink")
+    private String photoLink;
 
 
 }
