@@ -51,37 +51,31 @@ export default{
 
 <div class="footer-left">
 
-  <h3>Hidework</h3>
+  <h3>NoteHub</h3>
 
   <p class="footer-links">
-    <a href="" class="link-1">Главная</a>
-
-    <a href="">О Каталог</a>
-
-    <a href=""></a>
-
-    <a href=""></a>
+    
 
   </p>
 
-  <p class="footer-company-name">Hidework © 2024</p>
+  <p class="footer-company-name">NoteHub © 2024</p>
 </div>
 
 <div class="footer-center">
 
   <div>
     <i class="fa fa-map-marker"></i>
-    <p class="tx1"><span>г.Ростов-на-Дону</span>ул.Гагарина 1</p>
+    
   </div>
 
   <div>
     <i class="fa fa-phone"></i>
-    <p class="tx1">+7-934-56-76-90</p>
+   
   </div>
 
   <div>
     <i class="fa fa-envelope"></i>
-    <p class="tx1"><a class="a" href="">Hidework@gmail.com</a></p>
+   
   </div>
 
 </div>

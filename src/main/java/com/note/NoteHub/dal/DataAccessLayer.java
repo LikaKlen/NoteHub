@@ -5,12 +5,12 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.List;
@@ -26,6 +26,7 @@ public class DataAccessLayer {
     Session session = null;
 
 //Group
+
     public void createGroup(Group newGroup) {
         session = sessionFactory.openSession();
         session.beginTransaction();

@@ -1,5 +1,6 @@
 <script>
 import api from "./api/api.js";
+
 export default {
   data() {
     return {
@@ -10,58 +11,52 @@ export default {
     };
   },
   methods: {
-    fetchStudent(studentId) {
-      api.get(`/authorized/student/${studentId}`)
-        .then(response => {
-          this.student = response.data;
-        })
-        .catch(error => {
-          this.errorMessage = 'Ошибка при загрузке данных студента';
-        });
+    async fetchStudent(studentId) {
+      try {
+        const response = await api.get(`/authorized/student/${studentId}`);
+        this.student = response.data;
+      } catch (error) {
+        this.errorMessage = 'Ошибка при загрузке данных студента';
+      }
     },
-    fetchReviews() {
-      const studentId = this.$route.params.id; // Получаем id студента из маршрута
-      api.get(`/authorized/reviewByStudentId?id=${studentId}`) // Используем полученный id для запроса отзывов
-        .then(response => {
-          this.reviews = response.data; // Наполняем массив отзывов полученными данными
-        })
-        .catch(error => {
-          this.errorMessage = 'Ошибка при загрузке отзывов';
-        });
+    async fetchReviews() {
+      try {
+        const studentId = this.$route.params.id; // Получаем id студента из маршрута
+        const response = await api.get(`/authorized/reviewByStudentId?id=${studentId}`); // Используем полученный id для запроса отзывов
+        this.reviews = response.data; // Наполняем массив отзывов полученными данными
+      } catch (error) {
+        this.errorMessage = 'Ошибка при загрузке отзывов';
+      }
     },
-    // здесь пишем функцию которая получает все заметки по айди студента $route.params.id. И результатом функции наполняем массив reviews.
-    submitFeedback() {
-       try {
-      const newReview = {
-        student: {
-          studentId: this.$route.params.id,
-        },   // если что обернуть в Number()
-        shortDescription: this.shortDescription, 
-        }
-        if(this.shortDescription.length ==0){
+    async submitFeedback() {
+      try {
+        const newReview = {
+          student: {
+            studentId: Number(this.$route.params.id),
+          },
+          shortDescription: this.shortDescription, 
+        };
+        if (this.shortDescription.length === 0) {
           this.errorMessage = 'Пустое поле по отправке отзыва';
-        }
-        else{
-          api.post(`/authorized/new/review`, newReview)
+        } else {
+          await api.post(`/authorized/new/review`, newReview);
           alert('Отзыв успешно отправлен');
-          this.reviews.push(newReview)
+          this.reviews.push(newReview);
         }
-  
       } catch (error) {
         this.errorMessage = 'Ошибка при отправке отзыва';
       }
     }
-
-    },
-    
-  mounted() {
-    const studentId = this.$route.params.id;
-    this.fetchStudent(studentId);
-    this.fetchReviews(studentId);
-    // здесь ее вызываем
   },
-  
-  
+  async mounted() {
+    try {
+      const studentId = this.$route.params.id;
+      await this.fetchStudent(studentId);
+      await this.fetchReviews();
+    } catch (error) {
+      this.errorMessage = 'Ошибка при инициализации данных';
+    }
+  },
 };
 </script>
 
@@ -119,7 +114,7 @@ export default {
 
 <div class="footer-left">
 
-  <h3>Hidework</h3>
+  <h3>NoteHub</h3>
 
   <p class="footer-links">
     <a href="" class="link-1"></a>

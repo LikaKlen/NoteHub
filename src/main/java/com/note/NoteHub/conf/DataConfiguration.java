@@ -4,11 +4,13 @@ import com.note.NoteHub.dal.DataAccessLayer;
 import com.note.NoteHub.models.Teacher;
 import com.note.NoteHub.security.TokenFilter;
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 public class DataConfiguration {
