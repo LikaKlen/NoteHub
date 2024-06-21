@@ -89,7 +89,7 @@ export default {
     </div>
     <nav>
       <ul class="nav">
-        <li><a href="">Личный кабинет</a></li>
+        <li><a href="/auth/home">Личный кабинет</a></li>
         <li><a href="/auth/StudProf">Поиск студента</a></li>
         <li><a href="">Выход</a></li>
       </ul>

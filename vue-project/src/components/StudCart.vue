@@ -3,7 +3,7 @@ import api from "./api/api.js";
 export default {
   data() {
     return {
-      student:null,
+      student: null,
       reviews: [],
       shortDescription: '',
       errorMessage: ''
@@ -17,6 +17,16 @@ export default {
         })
         .catch(error => {
           this.errorMessage = 'Ошибка при загрузке данных студента';
+        });
+    },
+    fetchReviews() {
+      const studentId = this.$route.params.id; // Получаем id студента из маршрута
+      api.get(`/authorized/reviewByStudentId?id=${studentId}`) // Используем полученный id для запроса отзывов
+        .then(response => {
+          this.reviews = response.data; // Наполняем массив отзывов полученными данными
+        })
+        .catch(error => {
+          this.errorMessage = 'Ошибка при загрузке отзывов';
         });
     },
     // здесь пишем функцию которая получает все заметки по айди студента $route.params.id. И результатом функции наполняем массив reviews.
@@ -43,11 +53,15 @@ export default {
     }
 
     },
+    
   mounted() {
     const studentId = this.$route.params.id;
     this.fetchStudent(studentId);
+    this.fetchReviews(studentId);
     // здесь ее вызываем
-  }
+  },
+  
+  
 };
 </script>
 
@@ -59,7 +73,7 @@ export default {
       </div>
       <nav>
         <ul class="nav">
-          <li><a href="">Личный кабинет</a></li>
+          <li><a href="/auth/home">Личный кабинет</a></li>
           <li><a href="/auth/StudProf">Поиск студента</a></li>
           <li><a href="">Выход</a></li>
         </ul>
@@ -84,12 +98,15 @@ export default {
         <div v-else>
           <p>Загрузка данных студента...</p>
         </div>
+        
         <div class="feedback-section">
           <h2>Оставить отзыв</h2>
           <input type="text" v-model="shortDescription" placeholder="Напишите свой отзыв здесь..."></input>
           <button @click="submitFeedback">Отправить отзыв</button>
           <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
         </div>
+        <div>Отзывы</div>
+        
         <div v-if="reviews.length">
           <ul>
             <li v-for="review in reviews">{{review.shortDescription}}</li>
@@ -105,9 +122,9 @@ export default {
   <h3>Hidework</h3>
 
   <p class="footer-links">
-    <a href="" class="link-1">Главная</a>
+    <a href="" class="link-1"></a>
 
-    <a href="">О Каталог</a>
+    <a href=""></a>
 
     <a href=""></a>
 
@@ -115,24 +132,24 @@ export default {
 
   </p>
 
-  <p class="footer-company-name">Hidework © 2024</p>
+  <p class="footer-company-name">NoteHub © 2024</p>
 </div>
 
 <div class="footer-center">
 
   <div>
     <i class="fa fa-map-marker"></i>
-    <p class="tx1"><span>г.Ростов-на-Дону</span>ул.Гагарина 1</p>
+    <p class="tx1"></p>
   </div>
 
   <div>
     <i class="fa fa-phone"></i>
-    <p class="tx1">+7-934-56-76-90</p>
+    <p class="tx1"></p>
   </div>
 
   <div>
     <i class="fa fa-envelope"></i>
-    <p class="tx1"><a class="a" href="">Hidework@gmail.com</a></p>
+    <p class="tx1"><a class="a" href=""></a></p>
   </div>
 
 </div>
