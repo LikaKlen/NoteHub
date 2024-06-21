@@ -173,10 +173,8 @@ public class DataAccessLayer {
         parent.setFirstName(updatedParent.getFirstName());
         parent.setLastName(updatedParent.getLastName());
         parent.setPatronymic(updatedParent.getPatronymic());
-        parent.setAge(updatedParent.getAge());
         parent.setPhoneNumber(updatedParent.getPhoneNumber());
         parent.setEmail(updatedParent.getEmail());
-        parent.setStudent(updatedParent.getStudent());//?
         session.merge(parent);
         session.getTransaction().commit();
         if (session != null) {
@@ -301,16 +299,7 @@ public class DataAccessLayer {
         query.select(root).where(studentIdPredicate);
         return session.createQuery(query).getResultList();
     }
-    public List<Review> getReviewByTeacherId(Long id) {
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Review> query = builder.createQuery(Review.class);
-        Root<Review> root = query.from(Review.class);
-        Predicate teacherIdPredicate = builder.equal(root.get("teacher").get("teacherId"), id);
-        query.select(root).where(teacherIdPredicate);
-        return session.createQuery(query).getResultList();
-    }
+
     public List<Review> getReviews(){
         session = sessionFactory.openSession();
         session.getTransaction().begin();
@@ -326,9 +315,7 @@ public class DataAccessLayer {
         Review review = session.get(Review.class, id);
         review.setShortDescription(updatedReview.getShortDescription());
         review.setDateTime(updatedReview.getDateTime());
-        review.setEstimation(updatedReview.getEstimation());
         review.setStudent(updatedReview.getStudent());
-        review.setTeacher(updatedReview.getTeacher());
         session.merge(review);
         session.getTransaction().commit();
         if (session != null) {

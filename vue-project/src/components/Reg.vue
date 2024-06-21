@@ -9,7 +9,7 @@ export default{
     return{
       users: [],
       firstName: '',
-      lastName: 0,
+      lastName: '',
       patronymic:'',
       phoneNumber:'',
       email:'',

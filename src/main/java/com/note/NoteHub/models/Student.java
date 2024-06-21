@@ -15,7 +15,7 @@ import java.util.Set;
 public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long studentId;
+    private int studentId;
     @Column(name = "firstName")
     private String firstName;
     @Column(name = "lastName")
@@ -36,6 +36,7 @@ public class Student {
     @ManyToOne
     @JoinColumn(name = "specializationId", referencedColumnName = "specializationId")
     private Specialization specialization;
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "student")
-    private Set<Parent> parent;
+    @ManyToOne
+    @JoinColumn(name = "parentId", referencedColumnName = "parentId")
+    private Parent parent;
 }

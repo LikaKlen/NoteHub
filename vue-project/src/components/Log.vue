@@ -72,7 +72,7 @@ export default{
             </button>
             
         </div>
-        <p>Нет аккаунта? <a href="/log">Регистрация</a></p>
+        <p>Нет аккаунта? <a href="/reg">Регистрация</a></p>
     </div>
     
   </main>

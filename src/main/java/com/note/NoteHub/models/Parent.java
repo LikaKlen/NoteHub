@@ -18,17 +18,9 @@ public class Parent {
     private String lastName;
     @Column(name = "patronymic")//отчество
     private String patronymic;
-    @Column(name = "age")
-    private String age;
-    @Column(name = "photoLink")
-    private String photoLink;
     @Column(name = "email")
     private String email;
     @Column(name = "phoneNumber")
     private String phoneNumber;
-    @ManyToMany
-    @JoinTable(name = "Has",
-            joinColumns = @JoinColumn(name = "parentId", referencedColumnName = "parentId"),
-            inverseJoinColumns = @JoinColumn(name = "studentId", referencedColumnName = "studentId"))
-    private Set<Student> student;
+
 }

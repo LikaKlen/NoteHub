@@ -8,10 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
-@RequestMapping("/unauthorized")
+@RequestMapping("/authorized")
 public class MainController {
     private final DataAccessLayer dataAccessLayer;
     @Autowired
@@ -46,10 +47,7 @@ public class MainController {
     public List<Review> getReviewByStudentId(@RequestParam Long id) {
         return dataAccessLayer.getReviewByStudentId(id);
     }
-    @GetMapping("reviewByTeacherId")
-    public List<Review> getReviewByTeacherId(@RequestParam Long id) {
-        return dataAccessLayer.getReviewByTeacherId(id);
-    }
+
     @GetMapping("reviews")
     public ResponseEntity getReviews(){
         return ResponseEntity.ok(dataAccessLayer.getReviews());
@@ -77,9 +75,34 @@ public class MainController {
         return dataAccessLayer.getStudentBySpecializationId(id);
     }
     @GetMapping("students")
-    public ResponseEntity getStudents(){
-        return ResponseEntity.ok(dataAccessLayer.getStudents());
+    public ResponseEntity getStudents(
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String group
+    ) {
+        List<Student> students = dataAccessLayer.getStudents();
+
+        if (firstName != null && !firstName.isEmpty()) {
+            students = students.stream()
+                    .filter(student -> student.getFirstName().toLowerCase().contains(firstName.toLowerCase()))
+                    .collect(Collectors.toList());
+        }
+
+        if (lastName != null && !lastName.isEmpty()) {
+            students = students.stream()
+                    .filter(student -> student.getLastName().toLowerCase().contains(lastName.toLowerCase()))
+                    .collect(Collectors.toList());
+        }
+
+        if (group != null && !group.isEmpty()) {
+            students = students.stream()
+                    .filter(student -> student.getGroup().getGroupName().toLowerCase().contains(group.toLowerCase()))
+                    .collect(Collectors.toList());
+        }
+
+        return ResponseEntity.ok(students);
     }
+
     //Teacher
     @GetMapping("teacher/{id}")
     public ResponseEntity getTeacherById(@PathVariable("id") long id){

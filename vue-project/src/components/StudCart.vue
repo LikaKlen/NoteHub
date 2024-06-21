@@ -3,143 +3,111 @@ import api from "./api/api.js";
 export default {
   data() {
     return {
-      students: [],
-      filteredStudents: [],
-      firstName: '',
-      lastName: '',
-      group: '',
-      errorMessage: '',
-      selectedStudent: null,
-      expandedGroups: {},
-
+      student:null,
+      reviews: [],
+      shortDescription: '',
+      errorMessage: ''
     };
   },
-  computed: {
-    groupedStudents() {
-      const groups = {};
-      this.filteredStudents.forEach(student => {
-        const groupName = student.group.groupName;
-        if (!groups[groupName]) {
-          groups[groupName] = [];
-        }
-        groups[groupName].push(student);
-      });
-      return groups;
-    }
-  },
   methods: {
-    fetchStudents() {
-      api.get('/authorized/students')
+    fetchStudent(studentId) {
+      api.get(`/authorized/student/${studentId}`)
         .then(response => {
-          this.students = response.data;
-          this.filteredStudents = this.students;
+          this.student = response.data;
         })
         .catch(error => {
-          this.errorMessage = 'Ошибка при загрузке данных студентов';
+          this.errorMessage = 'Ошибка при загрузке данных студента';
         });
     },
-    searchStudents() {
-      const params = {};
-      if (this.firstName) params.firstName = this.firstName;
-      if (this.lastName) params.lastName = this.lastName;
-      if (this.group) params.group = this.group;
-
-      api.get('/authorized/students', { params })
-        .then(response => {
-          this.filteredStudents = response.data;
-          this.$nextTick(() => {
-            this.$forceUpdate();
-          });
-          if (!this.filteredStudents.find(student => student.id === this.selectedStudent)) {
-            this.selectedStudent = null;
-          }
-        })
-        .catch(error => {
-          this.errorMessage = 'Ошибка при поиске студентов';
-        });
-    },
-    toggleGroup(group) {
-      this.$set(this.expandedGroups, group, !this.expandedGroups[group]);
-    },
-    async navigateToStudent() { 
-      if(this.selectedStudent){
-        this.$router.push(`/auth/${this.selectedStudent}`)
-      }
-    },
-    goToStudCart() {
-      if (this.selectedStudent) {
-        
-        window.location.href ="/auth/StudCart"; 
-      } else {
-        alert('Пожалуйста, выберите студента');
+    // здесь пишем функцию которая получает все заметки по айди студента $route.params.id. И результатом функции наполняем массив reviews.
+    submitFeedback() {
+       try {
+      const newReview = {
+        student: {
+          studentId: this.$route.params.id,
+        },   // если что обернуть в Number()
+        shortDescription: this.shortDescription, 
+        }
+        if(this.shortDescription.length ==0){
+          this.errorMessage = 'Пустое поле по отправке отзыва';
+        }
+        else{
+          api.post(`/authorized/new/review`, newReview)
+          alert('Отзыв успешно отправлен');
+          this.reviews.push(newReview)
+        }
+  
+      } catch (error) {
+        this.errorMessage = 'Ошибка при отправке отзыва';
       }
     }
-  },
+
+    },
   mounted() {
-    this.fetchStudents();
+    const studentId = this.$route.params.id;
+    this.fetchStudent(studentId);
+    // здесь ее вызываем
   }
 };
 </script>
 
 <!-- html -->
 <template>
-  <header>
-    <div class="logo">
-      <a href="/home"><img src="C:\Users\Admin\Downloads\NoteHub\vue-project\src\assets\logo.png" height="100px"></a>
-    </div>
-    <nav>
-      <ul class="nav">
-        <li><a href="">Личный кабинет</a></li>
-        <li><a href="/auth/StudProf">Поиск студента</a></li>
-        <li><a href="">Выход</a></li>
-      </ul>
-    </nav>
-  </header>
-  
-  <main>
-    <div class="page">
-      <h1>Поиск студента</h1>
-      <div class="search-filters">
-        <input type="text" v-model="firstName" placeholder="Имя">
-        <input type="text" v-model="lastName" placeholder="Фамилия">
-        <input type="text" v-model="group" placeholder="Группа">
-        <button @click="searchStudents">Поиск</button>
+    <header>
+      <div class="logo">
+        <a href="/home"><img src="C:\Users\Admin\Downloads\NoteHub\vue-project\src\assets\logo.png" height="100px"></a>
       </div>
-      <div class="group-list">
-        <div v-for="(students, group) in groupedStudents" :key="group">
-          <h3 @click="toggleGroup(group)">
-            {{ group }} <span v-if="expandedGroups[group]">▲</span><span v-else>▼</span>
-          </h3>
-          <div v-if="expandedGroups[group]" class="student-list">
-            <div v-for="student in students" :key="student.studentId" class="student">
-              <p>{{ student.firstName }} {{ student.lastName }}</p>
-            </div>
-          </div>
+      <nav>
+        <ul class="nav">
+          <li><a href="">Личный кабинет</a></li>
+          <li><a href="/auth/StudProf">Поиск студента</a></li>
+          <li><a href="">Выход</a></li>
+        </ul>
+      </nav>
+    </header>
+    
+    <main>
+      <div class="page">
+        <h1>Студент</h1>
+        <div v-if="student" class="student-details">
+          <img :src="student.photoLink" alt="Фото студента" height="150px">
+          <p>Имя: {{ student.firstName }}</p>
+          <p>Фамилия: {{ student.lastName }}</p>
+          <p>Отчество: {{ student.patronymic }}</p>
+          <p>Возраст: {{ student.age }}</p>
+          <p>Email: {{ student.email }}</p>
+          <p>Телефон: {{ student.phoneNumber }}</p>
+          <p>Группа: {{ student.group.groupName }}</p>
+          <p>Специализация: {{ student.specialization.specializationName }}</p>
+          <p>Родитель: {{ student.parent }}</p>
+        </div>
+        <div v-else>
+          <p>Загрузка данных студента...</p>
+        </div>
+        <div class="feedback-section">
+          <h2>Оставить отзыв</h2>
+          <input type="text" v-model="shortDescription" placeholder="Напишите свой отзыв здесь..."></input>
+          <button @click="submitFeedback">Отправить отзыв</button>
+          <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+        </div>
+        <div v-if="reviews.length">
+          <ul>
+            <li v-for="review in reviews">{{review.shortDescription}}</li>
+          </ul>
         </div>
       </div>
-      <div class="student-dropdown">
-        <select v-model="selectedStudent">
-          <option disabled value="">Выберите студента</option>
-          <option v-for="student in filteredStudents" :key="student.studentId" :value="student.studentId">
-            {{ student.firstName }} {{ student.lastName }}
-          </option>
-        </select>
-        <button @click="navigateToStudent">Перейти на страницу студента</button>
-      </div>
-
-    </div>
-  </main>
+    </main>
 
   <footer class="footer-distributed">
 
 <div class="footer-left">
 
-  <h3>NoteHub</h3>
+  <h3>Hidework</h3>
 
   <p class="footer-links">
-    <a href="" ></a>
+    <a href="" class="link-1">Главная</a>
 
-    <a href=""></a>
+    <a href="">О Каталог</a>
 
     <a href=""></a>
 
@@ -147,24 +115,24 @@ export default {
 
   </p>
 
-  <p class="footer-company-name">NoteHub © 2024</p>
+  <p class="footer-company-name">Hidework © 2024</p>
 </div>
 
 <div class="footer-center">
 
   <div>
     <i class="fa fa-map-marker"></i>
-   
+    <p class="tx1"><span>г.Ростов-на-Дону</span>ул.Гагарина 1</p>
   </div>
 
   <div>
     <i class="fa fa-phone"></i>
-    
+    <p class="tx1">+7-934-56-76-90</p>
   </div>
 
   <div>
     <i class="fa fa-envelope"></i>
-    
+    <p class="tx1"><a class="a" href="">Hidework@gmail.com</a></p>
   </div>
 
 </div>
@@ -257,10 +225,10 @@ header, footer {
 
 /* Header styling */
 header {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 20px;
   background-color: #333;
   color: #fff;
 }
@@ -270,11 +238,10 @@ header {
 }
 
 nav ul.nav {
-  width: 100%;
   list-style: none;
   display: flex;
   gap: 20px;
-  padding-right: 20px;
+  padding: 0;
   margin: 0;
 }
 
